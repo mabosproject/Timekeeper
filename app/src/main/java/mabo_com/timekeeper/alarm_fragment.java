@@ -81,7 +81,9 @@ public class alarm_fragment extends android.support.v4.app.Fragment {
 
                 @Override
                 public void run () {
+                    if(getActivity()!=null){
                         getActivity().runOnUiThread(setDateRunnable);
+                    }
                 }
         },0,1000);
 
