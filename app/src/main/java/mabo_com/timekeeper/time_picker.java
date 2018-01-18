@@ -18,8 +18,11 @@ public class time_picker extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timepicker);
+        Intent intent_alarm_config = getIntent();
         TimePicker timePicker = (TimePicker)this.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
+        timePicker.setHour(intent_alarm_config.getIntExtra("CURRENT_HOUR",0));
+        timePicker.setMinute(intent_alarm_config.getIntExtra("CURRENT_MINUTE",0));
     }
 
     public void close_time_picker(View view) {
@@ -35,7 +38,7 @@ public class time_picker extends Activity {
         // 設定時刻の分を取得
         int min = timePicker.getMinute();
         return_intent.putExtra("HOUR",hour);
-        return_intent.putExtra("MIN",min);
+        return_intent.putExtra("MINUTE",min);
 
         setResult(RESULT_OK,return_intent);
         finish();
