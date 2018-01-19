@@ -165,18 +165,25 @@ public class alarm_config extends Activity {
         switch (determine_snooze){
             case 0:
                 snooze_text.setText(R.string.non_snooze);
+                break;
             case 5:
                 snooze_text.setText(R.string.minutes_5);
+                break;
             case 10:
                 snooze_text.setText(R.string.minutes_10);
+                break;
             case 15:
                 snooze_text.setText(R.string.minutes_15);
+                break;
             case 20:
                 snooze_text.setText(R.string.minutes_20);
+                break;
             case 25:
                 snooze_text.setText(R.string.minutes_25);
+                break;
             case 30:
                 snooze_text.setText(R.string.minutes_30);
+                break;
         }
     }
 
