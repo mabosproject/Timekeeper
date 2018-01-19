@@ -18,66 +18,66 @@
 
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBox_sun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/sun" />
 
             <CheckBox
-                android:id="@+id/checkBox7"
+                android:id="@+id/checkBox_mon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/mon" />
 
             <CheckBox
-                android:id="@+id/checkBox6"
+                android:id="@+id/checkBox_tue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/tue" />
 
             <CheckBox
-                android:id="@+id/checkBox5"
+                android:id="@+id/checkBox_wed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/wed" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkBox_thu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/thu" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkBox_fri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/fri" />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/checkBox_sat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginStart="@dimen/listside_margin"
+                android:layout_marginTop="@dimen/list_padding"
+                android:layout_marginBottom="@dimen/list_padding"
+                android:layout_marginStart="@dimen/list_side_padding"
                 android:text="@string/sat" />
 
             <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="10dp"
-                android:layout_marginEnd="@dimen/listside_margin"
+                android:layout_marginEnd="@dimen/list_side_padding"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 

@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.TimePicker;
-
-import java.sql.Time;
-import java.util.Locale;
 
 public class time_picker extends Activity {
 
-    Intent return_intent = new Intent();
+    Intent time_picker_return_intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +33,10 @@ public class time_picker extends Activity {
         int hour = timePicker.getHour();
         // 設定時刻の分を取得
         int min = timePicker.getMinute();
-        return_intent.putExtra("HOUR",hour);
-        return_intent.putExtra("MINUTE",min);
+        time_picker_return_intent.putExtra("HOUR",hour);
+        time_picker_return_intent.putExtra("MINUTE",min);
 
-        setResult(RESULT_OK,return_intent);
+        setResult(RESULT_OK, time_picker_return_intent);
         finish();
     }
 }

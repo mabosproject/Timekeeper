@@ -28,4 +28,11 @@
     <string name="alarm_volume">アラームの音量</string>
     <string name="snooze">スヌーズ設定</string>
     <string name="vibration">バイブレーション</string>
+    <string name="non_snooze">設定しない</string>
+    <string name="minutes_30">30分</string>
+    <string name="minutes_25">25分</string>
+    <string name="minutes_15">15分</string>
+    <string name="minutes_20">20分</string>
+    <string name="minutes_10">10分</string>
+    <string name="minutes_5">5分</string>
 </resources>

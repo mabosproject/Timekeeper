@@ -71,10 +71,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginEnd="@dimen/listside_margin"
-                android:layout_marginStart="@dimen/listside_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="time_pick"
@@ -104,10 +104,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="touch_repeat_option"
@@ -186,10 +186,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:orientation="vertical">
 
                 <TextView
@@ -216,10 +216,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="pick_sound"
@@ -249,10 +249,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:orientation="vertical">
 
                 <TextView
@@ -282,10 +282,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_marginTop="@dimen/list_margin"
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="@dimen/list_padding"
+                android:paddingTop="@dimen/list_padding"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="touch_snooze_option"
@@ -311,24 +311,33 @@
                 android:layout_height="1dp"
                 android:background="#d6d6d6" />
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/listside_margin"
-                android:layout_marginLeft="@dimen/listside_margin"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
+                android:paddingEnd="@dimen/list_side_padding"
+                android:paddingStart="@dimen/list_side_padding"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="touch_vibration_option"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/string_vibration"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="@dimen/config_title_textsize"
                     android:text="@string/vibration" />
 
-            </LinearLayout>
+                <Switch
+                    android:id="@+id/vibration_switch"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
 
 
         </LinearLayout>

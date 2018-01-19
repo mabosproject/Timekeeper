@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
-    <dimen name="list_margin">10dp</dimen>
-    <dimen name="listside_margin">20dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="list_side_padding">20dp</dimen>
     <dimen name="config_title_textsize">18sp</dimen>
 </resources>

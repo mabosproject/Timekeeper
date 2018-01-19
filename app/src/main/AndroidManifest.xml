@@ -28,6 +28,9 @@
         <activity
             android:name=".repeat_option"
             android:theme="@style/Theme.TranslucentBackground" />
+        <activity
+            android:name=".snooze_option"
+            android:theme="@style/Theme.TranslucentBackground" />
     </application>
 
 </manifest>
