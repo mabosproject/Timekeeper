@@ -2,6 +2,9 @@ package mabo_com.timekeeper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
@@ -18,7 +21,7 @@ public class alarm_config extends Activity {
     static final int REQUEST_CODE_SNOOZE_OPTION = 14;
     static final int SNOOZE_NON = 0x00;
     private static int hour,minute;
-    private static String hour_min;
+    private static String hour_min,sound_name;
     private static int determine_repeat,determine_snooze;
     private static boolean vibration_on_off;
 
@@ -35,6 +38,7 @@ public class alarm_config extends Activity {
         TextView repeat_thu = findViewById(R.id.string_thu);
         TextView repeat_fri = findViewById(R.id.string_fri);
         TextView repeat_sat = findViewById(R.id.string_sat);
+        TextView sound_text = findViewById(R.id.alarm_sound);
         TextView snooze_text = findViewById(R.id.snooze_text);
         Switch vibration_switch = findViewById(R.id.vibration_switch);
         Calendar cal = Calendar.getInstance();
@@ -44,6 +48,10 @@ public class alarm_config extends Activity {
         alarm_time_text.setText(hour_min);
         determine_repeat = 0x00;
         determine_repeat_color(repeat_sun,repeat_mon,repeat_tue,repeat_wed,repeat_thu,repeat_fri,repeat_sat);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
+        sound_name = ringtone.getTitle(getApplicationContext());
+        sound_text.setText(sound_name);
         determine_snooze = 0;
         determine_snooze_text(snooze_text);
         vibration_on_off = false;
@@ -77,6 +85,13 @@ public class alarm_config extends Activity {
                 }
 
             case REQUEST_CODE_SOUND_PICKER:
+                if(resultCode == RESULT_OK){
+                    TextView sound_text = findViewById(R.id.alarm_sound);
+                    Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                    Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
+                    sound_name = ringtone.getTitle(getApplicationContext());
+                    sound_text.setText(sound_name);
+                }
 
             case REQUEST_CODE_SNOOZE_OPTION:
                 if(resultCode == RESULT_OK){
@@ -153,6 +168,9 @@ public class alarm_config extends Activity {
     }
 
     public void pick_sound(View view) {
+        Intent intent_sound_picker = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent_sound_picker.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT,true);
+        startActivityForResult(intent_sound_picker,REQUEST_CODE_SOUND_PICKER);
     }
 
     public void touch_snooze_option(View view) {
