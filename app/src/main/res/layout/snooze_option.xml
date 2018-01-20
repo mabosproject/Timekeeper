@@ -27,7 +27,7 @@
                 android:layout_marginTop="@dimen/list_padding"
                 android:layout_marginBottom="@dimen/list_padding"
                 android:layout_marginStart="@dimen/list_side_padding"
-                android:text="@string/non_snooze" />
+                android:text="@string/non_option" />
 
             <RadioButton
                 android:id="@+id/radioButton_5minutes"

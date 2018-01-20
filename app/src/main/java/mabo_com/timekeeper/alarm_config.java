@@ -1,12 +1,20 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -19,18 +27,21 @@ public class alarm_config extends Activity {
     static final int REQUEST_CODE_REPEAT_OPTION = 12;
     static final int REQUEST_CODE_SOUND_PICKER = 13;
     static final int REQUEST_CODE_SNOOZE_OPTION = 14;
-    static final int SNOOZE_NON = 0x00;
     private static int hour,minute;
     private static String hour_min,sound_name;
     private static int determine_repeat,determine_snooze;
     private static boolean vibration_on_off;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_config);
+
+        Intent intent_alarm_fragment = getIntent();
+
         TextView alarm_time_text = findViewById(R.id.alarm_time);
+
         TextView repeat_sun = findViewById(R.id.string_sun);
         TextView repeat_mon = findViewById(R.id.string_mon);
         TextView repeat_tue = findViewById(R.id.string_tue);
@@ -38,30 +49,46 @@ public class alarm_config extends Activity {
         TextView repeat_thu = findViewById(R.id.string_thu);
         TextView repeat_fri = findViewById(R.id.string_fri);
         TextView repeat_sat = findViewById(R.id.string_sat);
+
+        EditText alarm_comment = findViewById(R.id.editText);
+
         TextView sound_text = findViewById(R.id.alarm_sound);
+
+        SeekBar volume_bar = findViewById(R.id.seekBar);
+
         TextView snooze_text = findViewById(R.id.snooze_text);
+
         Switch vibration_switch = findViewById(R.id.vibration_switch);
-        Calendar cal = Calendar.getInstance();
-        hour = cal.get(Calendar.HOUR_OF_DAY);
-        minute = cal.get(Calendar.MINUTE);
+
+        hour = intent_alarm_fragment.getIntExtra("HOUR",0);
+        minute = intent_alarm_fragment.getIntExtra("MINUTE",0);
         set_up_alarm_time_string();
         alarm_time_text.setText(hour_min);
-        determine_repeat = 0x00;
+
+        determine_repeat = intent_alarm_fragment.getIntExtra("REPEAT",0x00);
         determine_repeat_color(repeat_sun,repeat_mon,repeat_tue,repeat_wed,repeat_thu,repeat_fri,repeat_sat);
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        alarm_comment.setText(intent_alarm_fragment.getStringExtra("COMMENT"));
+
+        Uri uri = intent_alarm_fragment.getParcelableExtra("URI");
         Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
         sound_name = ringtone.getTitle(getApplicationContext());
         sound_text.setText(sound_name);
-        determine_snooze = 0;
+
+        volume_bar.setProgress(intent_alarm_fragment.getIntExtra("VOLUME",8));
+
+        determine_snooze = intent_alarm_fragment.getIntExtra("SNOOZE",0);
         determine_snooze_text(snooze_text);
-        vibration_on_off = false;
+
+        vibration_on_off = intent_alarm_fragment.getBooleanExtra("VIBRATION",false);
         vibration_switch.setChecked(vibration_on_off);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //TimePickerのコールバック処理
+
         switch (requestCode){
+            //TimePickerのコールバック処理
             case REQUEST_CODE_TIME_PICKER:
                 if(resultCode == RESULT_OK){
                     TextView alarm_time_text = findViewById(R.id.alarm_time);
@@ -70,7 +97,8 @@ public class alarm_config extends Activity {
                     set_up_alarm_time_string();
                     alarm_time_text.setText(hour_min);
                 }
-
+                break;
+            //repeat_optionのコールバック処理
             case REQUEST_CODE_REPEAT_OPTION:
                 if(resultCode == RESULT_OK){
                     determine_repeat = data.getIntExtra("REPEAT_OPTION",0x00);
@@ -83,15 +111,21 @@ public class alarm_config extends Activity {
                     TextView repeat_sat = findViewById(R.id.string_sat);
                     determine_repeat_color(repeat_sun,repeat_mon,repeat_tue,repeat_wed,repeat_thu,repeat_fri,repeat_sat);
                 }
+                break;
 
             case REQUEST_CODE_SOUND_PICKER:
                 if(resultCode == RESULT_OK){
                     TextView sound_text = findViewById(R.id.alarm_sound);
                     Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                    if(uri == null){
+                        sound_text.setText(R.string.non_option);
+                        break;
+                    }
                     Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
                     sound_name = ringtone.getTitle(getApplicationContext());
                     sound_text.setText(sound_name);
                 }
+                break;
 
             case REQUEST_CODE_SNOOZE_OPTION:
                 if(resultCode == RESULT_OK){
@@ -99,10 +133,11 @@ public class alarm_config extends Activity {
                     TextView snooze_text = findViewById(R.id.snooze_text);
                     determine_snooze_text(snooze_text);
                 }
+                break;
 
         }
-    }
 
+    }
 
     public void close(View view) {
         finish();
@@ -182,7 +217,7 @@ public class alarm_config extends Activity {
     private void determine_snooze_text(TextView snooze_text) {
         switch (determine_snooze){
             case 0:
-                snooze_text.setText(R.string.non_snooze);
+                snooze_text.setText(R.string.non_option);
                 break;
             case 5:
                 snooze_text.setText(R.string.minutes_5);
@@ -210,6 +245,4 @@ public class alarm_config extends Activity {
         vibration_switch.setChecked(!vibration_on_off);
         vibration_on_off = !vibration_on_off;
     }
-
 }
-

@@ -49,7 +49,6 @@ public class alarm_fragment extends android.support.v4.app.Fragment {
 
         final Runnable setDateRunnable = new Runnable() {
             public void run() {
-
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
@@ -72,7 +71,6 @@ public class alarm_fragment extends android.support.v4.app.Fragment {
                 hourPointer.setRotation(getRad(1,hour,minute,second));
                 minutePointer.setRotation(getRad(2,hour,minute,second));
                 secondPointer.setRotation(getRad(3,hour,minute,second));
-
             }
         };
 
@@ -116,21 +114,21 @@ public class alarm_fragment extends android.support.v4.app.Fragment {
 
 
     private float getRad(int flag,int hour, int minute, int second ){
-        float hourrad, minuterad, secondrad;
+        float hour_radian, minute_radian, second_radian;
         switch (flag){
             case 1:
                 if(hour >= 12){
-                    hourrad = (hour-12f)*30f+minute*0.5f;
+                    hour_radian = (hour-12f)*30f+minute*0.5f;
                 }else{
-                    hourrad = hour*30f+minute*0.5f;
+                    hour_radian = hour*30f+minute*0.5f;
                 }
-                return hourrad;
+                return hour_radian;
             case 2:
-                minuterad = minute*6;
-                return minuterad;
+                minute_radian = minute*6;
+                return minute_radian;
             case 3:
-                secondrad = second*6;
-                return secondrad;
+                second_radian = second*6;
+                return second_radian;
             default: return 0;
         }
     }
