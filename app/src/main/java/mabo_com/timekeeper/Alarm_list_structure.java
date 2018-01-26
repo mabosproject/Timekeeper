@@ -1,5 +1,6 @@
 package mabo_com.timekeeper;
 
+import android.database.Cursor;
 import android.net.Uri;
 
 /**
@@ -8,12 +9,13 @@ import android.net.Uri;
 
 public class Alarm_list_structure {
 
-    long id;
-    int hour,minute;
-    String comment;
-    Uri uri;
-    int repeat,snooze;
-    boolean vibration;
+    private long id;
+    private int hour,minute;
+    private String comment;
+    private Uri uri;
+    private int repeat,snooze;
+    private boolean vibration;
+
 
     public long getId() {
         return id;

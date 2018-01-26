@@ -28,9 +28,12 @@ public class alarm_config extends Activity {
     static final int REQUEST_CODE_SOUND_PICKER = 13;
     static final int REQUEST_CODE_SNOOZE_OPTION = 14;
     private static int hour,minute;
-    private static String hour_min,sound_name;
+    private static String hour_min,comment,sound_name;
+    Uri uri;
     private static int determine_repeat,determine_snooze;
     private static boolean vibration_on_off;
+    Intent return_intent = new Intent();
+    EditText alarm_comment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class alarm_config extends Activity {
         TextView repeat_fri = findViewById(R.id.string_fri);
         TextView repeat_sat = findViewById(R.id.string_sat);
 
-        EditText alarm_comment = findViewById(R.id.editText);
+        alarm_comment = findViewById(R.id.editText);
 
         TextView sound_text = findViewById(R.id.alarm_sound);
 
@@ -68,9 +71,10 @@ public class alarm_config extends Activity {
         determine_repeat = intent_alarm_fragment.getIntExtra("REPEAT",0x00);
         determine_repeat_color(repeat_sun,repeat_mon,repeat_tue,repeat_wed,repeat_thu,repeat_fri,repeat_sat);
 
-        alarm_comment.setText(intent_alarm_fragment.getStringExtra("COMMENT"));
+        comment = intent_alarm_fragment.getStringExtra("COMMENT");
+        alarm_comment.setText(comment);
 
-        Uri uri = intent_alarm_fragment.getParcelableExtra("URI");
+        uri = intent_alarm_fragment.getParcelableExtra("URI");
         Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
         sound_name = ringtone.getTitle(getApplicationContext());
         sound_text.setText(sound_name);
@@ -140,10 +144,20 @@ public class alarm_config extends Activity {
     }
 
     public void close(View view) {
+        setResult(RESULT_CANCELED);
         finish();
     }
 
     public void retention(View view) {
+        comment = alarm_comment.getText().toString();
+        return_intent.putExtra("RET_HOUR",hour);
+        return_intent.putExtra("RET_MINUTE",minute);
+        return_intent.putExtra("RET_COMMENT",comment);
+        return_intent.putExtra("RET_URI",uri);
+        return_intent.putExtra("RET_REPEAT",determine_repeat);
+        return_intent.putExtra("RET_SNOOZE",determine_snooze);
+        return_intent.putExtra("RET_VIBRATION",vibration_on_off);
+        setResult(RESULT_OK,return_intent);
         finish();
     }
 

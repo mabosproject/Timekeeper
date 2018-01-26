@@ -16,6 +16,7 @@
     <string name="timepicker_ok">OK</string>
     <string name="text_time">時間</string>
     <string name="text_repetition">繰り返し</string>
+    <string name="no_repeat">No Repeat</string>
     <string name="sun">Sun</string>
     <string name="mon">Mon</string>
     <string name="tue">Tue</string>
