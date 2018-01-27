@@ -335,6 +335,7 @@
                 <Switch
                     android:id="@+id/vibration_switch"
                     android:layout_gravity="end"
+                    android:onClick="touch_vibration_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

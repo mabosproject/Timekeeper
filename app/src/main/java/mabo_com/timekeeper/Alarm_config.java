@@ -119,7 +119,7 @@ public class Alarm_config extends Activity {
             case REQUEST_CODE_SOUND_PICKER:
                 if(resultCode == RESULT_OK){
                     TextView sound_text = findViewById(R.id.alarm_sound);
-                    Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                    uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                     if(uri == null){
                         sound_text.setText(R.string.non_option);
                         break;
@@ -157,7 +157,7 @@ public class Alarm_config extends Activity {
         return_intent.putExtra("RET_VOLUME",volume_bar.getProgress());
         return_intent.putExtra("RET_REPEAT",determine_repeat);
         return_intent.putExtra("RET_SNOOZE",determine_snooze);
-        if(!vibration_on_off){
+        if(vibration_on_off == false){
             return_intent.putExtra("RET_VIBRATION",0);
         }else{
             return_intent.putExtra("RET_VIBRATION",1);
