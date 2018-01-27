@@ -9,76 +9,56 @@ import android.net.Uri;
 
 public class Alarm_list_structure {
 
-    private long id;
-    private int hour,minute;
-    private String comment;
-    private Uri uri;
-    private int repeat,snooze;
-    private boolean vibration;
+    private int id,hour,minute,volume,repeat,snooze,vibration;
+    private String comment,uri;
 
-
-    public long getId() {
-        return id;
+    public Alarm_list_structure(int id,int hour, int minute, int repeat, String comment, String uri, int volume, int snooze, int vibration){
+        this.id = id;
+        this.hour = hour;
+        this.minute = minute;
+        this.repeat = repeat;
+        this.comment = comment;
+        this.uri = uri;
+        this.volume = volume;
+        this.snooze = snooze;
+        this.vibration = vibration;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public int getHour() {
         return hour;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
     public int getMinute() {
         return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Uri getUri(){
-        return uri;
-    }
-
-    public void setUri(Uri uri){
-        this.uri = uri;
     }
 
     public int getRepeat(){
         return repeat;
     }
 
-    public void setRepeat(int repeat){
-        this.repeat = repeat;
+    public String getComment() {
+    return comment;
+    }
+
+    public String getUri(){
+    return uri;
+    }
+
+    public int getVolume(){
+        return volume;
     }
 
     public int getSnooze(){
         return snooze;
     }
 
-    public void setSnooze(int snooze){
-        this.snooze = snooze;
-    }
-
-    public boolean getVibration(){
+    public int getVibration(){
         return vibration;
     }
 
-    public void setVibration(Boolean vibration){
-        this.vibration = vibration;
-    }
 
 }

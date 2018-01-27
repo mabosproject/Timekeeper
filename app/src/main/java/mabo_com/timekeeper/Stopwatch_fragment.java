@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by masaki on 2018/01/01.
  */
 
-public class stopwatch_fragment extends android.support.v4.app.Fragment {
+public class Stopwatch_fragment extends android.support.v4.app.Fragment {
     private static final String TAG = "StopwatchTabFragment";
 
     @Nullable

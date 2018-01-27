@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 
-public class snooze_option extends Activity {
+public class Snooze_option extends Activity {
 
     Intent snooze_option_return_intent = new Intent();
     private int determine_snooze;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
 
-public class time_picker extends Activity {
+public class Time_picker extends Activity {
 
     Intent time_picker_return_intent = new Intent();
 

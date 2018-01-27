@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 
-public class repeat_option extends Activity {
+public class Repeat_option extends Activity {
 
     Intent repeat_option_return_intent = new Intent();
     private int determine_repeat;

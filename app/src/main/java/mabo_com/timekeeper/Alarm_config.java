@@ -1,35 +1,28 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.Calendar;
 
-
-public class alarm_config extends Activity {
+public class Alarm_config extends Activity {
 
     static final int REQUEST_CODE_TIME_PICKER = 11;
     static final int REQUEST_CODE_REPEAT_OPTION = 12;
     static final int REQUEST_CODE_SOUND_PICKER = 13;
     static final int REQUEST_CODE_SNOOZE_OPTION = 14;
-    private static int hour,minute;
+    private static int hour,minute,id;
     private static String hour_min,comment,sound_name;
     Uri uri;
+    SeekBar volume_bar;
     private static int determine_repeat,determine_snooze;
     private static boolean vibration_on_off;
     Intent return_intent = new Intent();
@@ -57,11 +50,13 @@ public class alarm_config extends Activity {
 
         TextView sound_text = findViewById(R.id.alarm_sound);
 
-        SeekBar volume_bar = findViewById(R.id.seekBar);
+        volume_bar = findViewById(R.id.seekBar);
 
         TextView snooze_text = findViewById(R.id.snooze_text);
 
         Switch vibration_switch = findViewById(R.id.vibration_switch);
+
+        id = intent_alarm_fragment.getIntExtra("ID",0);
 
         hour = intent_alarm_fragment.getIntExtra("HOUR",0);
         minute = intent_alarm_fragment.getIntExtra("MINUTE",0);
@@ -74,7 +69,7 @@ public class alarm_config extends Activity {
         comment = intent_alarm_fragment.getStringExtra("COMMENT");
         alarm_comment.setText(comment);
 
-        uri = intent_alarm_fragment.getParcelableExtra("URI");
+        uri = Uri.parse(intent_alarm_fragment.getStringExtra("URI"));
         Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),uri);
         sound_name = ringtone.getTitle(getApplicationContext());
         sound_text.setText(sound_name);
@@ -84,7 +79,11 @@ public class alarm_config extends Activity {
         determine_snooze = intent_alarm_fragment.getIntExtra("SNOOZE",0);
         determine_snooze_text(snooze_text);
 
-        vibration_on_off = intent_alarm_fragment.getBooleanExtra("VIBRATION",false);
+        if(intent_alarm_fragment.getIntExtra("VIBRATION",0) == 0){
+            vibration_on_off = false;
+        }else{
+            vibration_on_off = true;
+        }
         vibration_switch.setChecked(vibration_on_off);
     }
 
@@ -150,19 +149,25 @@ public class alarm_config extends Activity {
 
     public void retention(View view) {
         comment = alarm_comment.getText().toString();
+        return_intent.putExtra("RET_ID",id);
         return_intent.putExtra("RET_HOUR",hour);
         return_intent.putExtra("RET_MINUTE",minute);
         return_intent.putExtra("RET_COMMENT",comment);
-        return_intent.putExtra("RET_URI",uri);
+        return_intent.putExtra("RET_URI",uri.toString());
+        return_intent.putExtra("RET_VOLUME",volume_bar.getProgress());
         return_intent.putExtra("RET_REPEAT",determine_repeat);
         return_intent.putExtra("RET_SNOOZE",determine_snooze);
-        return_intent.putExtra("RET_VIBRATION",vibration_on_off);
+        if(!vibration_on_off){
+            return_intent.putExtra("RET_VIBRATION",0);
+        }else{
+            return_intent.putExtra("RET_VIBRATION",1);
+        }
         setResult(RESULT_OK,return_intent);
         finish();
     }
 
     public void time_pick(View view) {
-        Intent intent_time_picker = new Intent(getApplication(),time_picker.class);
+        Intent intent_time_picker = new Intent(getApplication(),Time_picker.class);
         intent_time_picker.putExtra("CURRENT_HOUR",hour);
         intent_time_picker.putExtra("CURRENT_MINUTE",minute);
         startActivityForResult(intent_time_picker,REQUEST_CODE_TIME_PICKER);
@@ -173,7 +178,7 @@ public class alarm_config extends Activity {
     }
 
     public void touch_repeat_option(View view) {
-        Intent intent_repeat_option = new Intent(getApplication(),repeat_option.class);
+        Intent intent_repeat_option = new Intent(getApplication(),Repeat_option.class);
         intent_repeat_option.putExtra("DETERMINE_REPEAT",determine_repeat);
         startActivityForResult(intent_repeat_option,REQUEST_CODE_REPEAT_OPTION);
     }
@@ -223,7 +228,7 @@ public class alarm_config extends Activity {
     }
 
     public void touch_snooze_option(View view) {
-        Intent intent_snooze_option = new Intent(getApplication(),snooze_option.class);
+        Intent intent_snooze_option = new Intent(getApplication(),Snooze_option.class);
         intent_snooze_option.putExtra("DETERMINE_SNOOZE",determine_snooze);
         startActivityForResult(intent_snooze_option,REQUEST_CODE_SNOOZE_OPTION);
     }

@@ -8,7 +8,7 @@
     android:layout_marginBottom="40dp"
     android:layout_marginRight="40dp"
     android:layout_marginLeft="40dp"
-    tools:context="mabo_com.timekeeper.time_picker">
+    tools:context="mabo_com.timekeeper.Time_picker">
 
     <LinearLayout
         android:layout_width="wrap_content"

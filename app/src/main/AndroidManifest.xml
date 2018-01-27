@@ -21,15 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".alarm_config" />
+        <activity android:name=".Alarm_config" />
         <activity
-            android:name=".time_picker"
+            android:name=".Time_picker"
             android:theme="@style/Theme.TranslucentBackground" />
         <activity
-            android:name=".repeat_option"
+            android:name=".Repeat_option"
             android:theme="@style/Theme.TranslucentBackground" />
         <activity
-            android:name=".snooze_option"
+            android:name=".Snooze_option"
             android:theme="@style/Theme.TranslucentBackground" />
     </application>
 

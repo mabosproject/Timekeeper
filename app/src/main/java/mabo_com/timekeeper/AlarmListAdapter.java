@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by masaki on 2018/01/20.
@@ -16,47 +17,51 @@ import java.util.ArrayList;
 public class AlarmListAdapter extends BaseAdapter {
 
     private Context context;
-    private LayoutInflater layoutInflater = null;
-    private ArrayList<Alarm_list_structure> alarm_list;
+    private List<Alarm_list_structure> items;
+    Alarm_list_structure alarm_list_structure;
 
-    public AlarmListAdapter(Context context) {
+    public AlarmListAdapter(Context context, List<Alarm_list_structure> items) {
         this.context = context;
-        this.layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.items = items;
     }
 
-    public void setAlarm_list(ArrayList<Alarm_list_structure> alarm_list) {
-        this.alarm_list = alarm_list;
-    }
-
+    // Listの要素数を返す
     @Override
     public int getCount() {
-        return alarm_list.size();
+        return items.size();
     }
 
+    // indexやオブジェクトを返す
     @Override
     public Object getItem(int position) {
-        return alarm_list.get(position);
+        return items.get(position);
     }
 
+    // IDを他のindexに返す
     @Override
     public long getItemId(int position) {
-        return alarm_list.get(position).getId();
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.alarm_list_row,parent,false);
 
-        int hour = alarm_list.get(position).getHour();
-        int minute = alarm_list.get(position).getMinute();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflater.inflate(R.layout.alarm_list_row, parent, false);
+
+        alarm_list_structure = items.get(position);
+
+        // 取得した各データを各TextViewにセット
+        int hour = alarm_list_structure.getHour();
+        int minute = alarm_list_structure.getMinute();
         String hour_min =String.format("%02d",hour)+":"+String.format("%02d",minute);
-        ((TextView)convertView.findViewById(R.id.time)).setText(hour_min);
+        ((TextView)convertView.findViewById(R.id.alarm_list_time)).setText(hour_min);
 
-        int repeat_option = alarm_list.get(position).getRepeat();
+        int repeat_option = alarm_list_structure.getRepeat();
         setRepeatText(convertView,repeat_option);
 
-        String comment = alarm_list.get(position).getComment();
-        ((TextView)convertView.findViewById(R.id.comment)).setText(comment);
+        String comment = alarm_list_structure.getComment();
+        ((TextView)convertView.findViewById(R.id.alarm_list_comment)).setText(comment);
 
         return convertView;
     }
