@@ -274,7 +274,7 @@ public class Alarm_fragment extends android.support.v4.app.Fragment implements V
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        return false;
+        return true;
     }
 
 
