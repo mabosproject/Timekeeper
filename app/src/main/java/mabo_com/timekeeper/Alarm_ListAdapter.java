@@ -7,20 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by masaki on 2018/01/20.
  */
 
-public class AlarmListAdapter extends BaseAdapter {
+public class Alarm_ListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Alarm_list_structure> items;
-    Alarm_list_structure alarm_list_structure;
+    private List<Alarm_ListStructure> items;
+    Alarm_ListStructure alarm_list_structure;
 
-    public AlarmListAdapter(Context context, List<Alarm_list_structure> items) {
+    public Alarm_ListAdapter(Context context, List<Alarm_ListStructure> items) {
         this.context = context;
         this.items = items;
     }

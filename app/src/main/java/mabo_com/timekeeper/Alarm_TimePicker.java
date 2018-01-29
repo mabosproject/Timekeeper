@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
 
-public class Time_picker extends Activity {
+public class Alarm_TimePicker extends Activity {
 
     Intent time_picker_return_intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.timepicker);
+        setContentView(R.layout.alarm_timepicker);
         Intent intent_alarm_config = getIntent();
         TimePicker timePicker = (TimePicker)this.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mabo_com.timekeeper">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
@@ -21,16 +23,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Alarm_config" />
+        <activity android:name=".Alarm_Config" />
         <activity
-            android:name=".Time_picker"
+            android:name=".Alarm_TimePicker"
             android:theme="@style/Theme.TranslucentBackground" />
         <activity
-            android:name=".Repeat_option"
+            android:name=".Alarm_RepeatOption"
             android:theme="@style/Theme.TranslucentBackground" />
         <activity
-            android:name=".Snooze_option"
+            android:name=".Alarm_SnoozeOption"
             android:theme="@style/Theme.TranslucentBackground" />
+        <receiver android:name="Alarm_BroadcastReceiver" >
+            <intent-filter>
+                <action android:name="Alarm_Action"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name=".Alarm_OriginalAlarmService" ></service>
+
+        <activity android:name=".Alarm_NotificationActivity" ></activity>
     </application>
 
 </manifest>

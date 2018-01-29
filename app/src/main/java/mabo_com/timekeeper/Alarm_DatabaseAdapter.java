@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Masaki Matsukawa on 2018/01/27.
  */
 
-public class Alarm_DB_adapter {
+public class Alarm_DatabaseAdapter {
 
     private final static String DB_NAME = "alarm_list.db";  //DB名
     private final static String DB_TABLE = "alarm_list";    //DBのテーブル
@@ -33,7 +33,7 @@ public class Alarm_DB_adapter {
     private DBHelper dbHelper = null;
     protected Context context;
 
-    public Alarm_DB_adapter(Context context){
+    public Alarm_DatabaseAdapter(Context context){
 
         this.context = context;
         dbHelper = new DBHelper(this.context);
@@ -44,7 +44,7 @@ public class Alarm_DB_adapter {
      *
      * @return this 自身のオブジェクト
      */
-    public  Alarm_DB_adapter openDB(){
+    public Alarm_DatabaseAdapter openDB(){
 
         db = dbHelper.getWritableDatabase();
         return this;
@@ -55,7 +55,7 @@ public class Alarm_DB_adapter {
      *
      * @return this 自身のオブジェクト
      */
-    public Alarm_DB_adapter readDB(){
+    public Alarm_DatabaseAdapter readDB(){
 
         db = dbHelper.getReadableDatabase();
         return this;

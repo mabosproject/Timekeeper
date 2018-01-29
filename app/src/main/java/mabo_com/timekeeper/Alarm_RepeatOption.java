@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 
-public class Repeat_option extends Activity {
+public class Alarm_RepeatOption extends Activity {
 
     Intent repeat_option_return_intent = new Intent();
     private int determine_repeat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.repeat_option);
+        setContentView(R.layout.alarm_repeat_option);
         Intent intent_repeat_option = getIntent();
         CheckBox checkBox_sun = findViewById(R.id.checkBox_sun);
         CheckBox checkBox_mon = findViewById(R.id.checkBox_mon);

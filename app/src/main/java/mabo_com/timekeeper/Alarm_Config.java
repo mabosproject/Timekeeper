@@ -1,6 +1,7 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -13,7 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 
-public class Alarm_config extends Activity {
+public class Alarm_Config extends Activity {
 
     static final int REQUEST_CODE_TIME_PICKER = 11;
     static final int REQUEST_CODE_REPEAT_OPTION = 12;
@@ -163,11 +164,13 @@ public class Alarm_config extends Activity {
             return_intent.putExtra("RET_VIBRATION",1);
         }
         setResult(RESULT_OK,return_intent);
+        Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getApplication(),id);
+        alarm_originalAlarmManager.addAlarm(hour,minute);
         finish();
     }
 
     public void time_pick(View view) {
-        Intent intent_time_picker = new Intent(getApplication(),Time_picker.class);
+        Intent intent_time_picker = new Intent(getApplication(),Alarm_TimePicker.class);
         intent_time_picker.putExtra("CURRENT_HOUR",hour);
         intent_time_picker.putExtra("CURRENT_MINUTE",minute);
         startActivityForResult(intent_time_picker,REQUEST_CODE_TIME_PICKER);
@@ -178,7 +181,7 @@ public class Alarm_config extends Activity {
     }
 
     public void touch_repeat_option(View view) {
-        Intent intent_repeat_option = new Intent(getApplication(),Repeat_option.class);
+        Intent intent_repeat_option = new Intent(getApplication(),Alarm_RepeatOption.class);
         intent_repeat_option.putExtra("DETERMINE_REPEAT",determine_repeat);
         startActivityForResult(intent_repeat_option,REQUEST_CODE_REPEAT_OPTION);
     }
@@ -228,7 +231,7 @@ public class Alarm_config extends Activity {
     }
 
     public void touch_snooze_option(View view) {
-        Intent intent_snooze_option = new Intent(getApplication(),Snooze_option.class);
+        Intent intent_snooze_option = new Intent(getApplication(),Alarm_SnoozeOption.class);
         intent_snooze_option.putExtra("DETERMINE_SNOOZE",determine_snooze);
         startActivityForResult(intent_snooze_option,REQUEST_CODE_SNOOZE_OPTION);
     }

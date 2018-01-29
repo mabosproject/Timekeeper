@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewpager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Alarm_fragment(),"Alarm");
+        adapter.addFragment(new Alarm_Fragment(),"Alarm");
         adapter.addFragment(new Stopwatch_fragment(),"Stopwatch");
         adapter.addFragment(new Timer_fragment(),"Timer");
         viewPager.setAdapter(adapter);

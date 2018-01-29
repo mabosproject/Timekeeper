@@ -2,7 +2,6 @@ package mabo_com.timekeeper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,11 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,17 +28,17 @@ import java.util.TimerTask;
  * Created by masaki on 2018/01/01.
  */
 
-public class Alarm_fragment extends android.support.v4.app.Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class Alarm_Fragment extends android.support.v4.app.Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "AlarmTabFragment";
     static final int REQUEST_CODE_ALARM_CONFIG = 15;
     static final int REQUEST_CODE_ALARM_CONFIG_EXISTED = 16;
 
-    private AlarmListAdapter alarmListAdapter;
-    private Alarm_DB_adapter alarm_db_adapter;
-    private List<Alarm_list_structure> items;
+    private Alarm_ListAdapter alarmListAdapter;
+    private Alarm_DatabaseAdapter alarm_db_adapter;
+    private List<Alarm_ListStructure> items;
     private ListView listView;
-    protected Alarm_list_structure alarm_list_structure;
+    protected Alarm_ListStructure alarm_list_structure;
 
     // 参照するDBのカラム：ID,品名,産地,個数,単価の全部なのでnullを指定
     private String[] columns = null;
@@ -63,12 +60,12 @@ public class Alarm_fragment extends android.support.v4.app.Fragment implements V
         button.setOnClickListener(this);
 
         // DBAdapterのコンストラクタ呼び出し
-        alarm_db_adapter = new Alarm_DB_adapter(getContext());
+        alarm_db_adapter = new Alarm_DatabaseAdapter(getContext());
 
         // itemsのArrayList生成
         items = new ArrayList<>();
 
-        alarmListAdapter = new AlarmListAdapter(getContext(),items);
+        alarmListAdapter = new Alarm_ListAdapter(getContext(),items);
 
         listView =view.findViewById(R.id.alarm_list);
 
@@ -165,7 +162,7 @@ public class Alarm_fragment extends android.support.v4.app.Fragment implements V
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity().getApplication(),Alarm_config.class);
+        Intent intent = new Intent(getActivity().getApplication(),Alarm_Config.class);
         Calendar cal = Calendar.getInstance();
         int alarm_hour = cal.get(Calendar.HOUR_OF_DAY);
         int alarm_minute = cal.get(Calendar.MINUTE);
@@ -229,7 +226,7 @@ public class Alarm_fragment extends android.support.v4.app.Fragment implements V
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity().getApplication(),Alarm_config.class);
+        Intent intent = new Intent(getActivity().getApplication(),Alarm_Config.class);
         alarm_list_structure = items.get(position);
         intent.putExtra("ID",alarm_list_structure.getId());
         intent.putExtra("HOUR",alarm_list_structure.getHour());
@@ -289,7 +286,7 @@ public class Alarm_fragment extends android.support.v4.app.Fragment implements V
 
         if(c.moveToFirst()){
             do{
-                alarm_list_structure = new Alarm_list_structure(
+                alarm_list_structure = new Alarm_ListStructure(
                     c.getInt(0),
                     c.getInt(1),
                     c.getInt(2),
