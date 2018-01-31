@@ -82,12 +82,13 @@ public class Alarm_DatabaseAdapter {
      * @param snooze スヌーズ
      * @param vibration バイブ
      */
-    public void saveDB(int hour, int minute, int repeat, String comment, String uri, int volume, int snooze, int vibration){
+    public void saveDB(int id, int hour, int minute, int repeat, String comment, String uri, int volume, int snooze, int vibration){
 
         db.beginTransaction();  //トランザクション開始
 
         try{
             ContentValues values = new ContentValues(); //データ設定用
+            values.put(ALARM_DB_ID,id);
             values.put(ALARM_DB_HOUR,hour);
             values.put(ALARM_DB_MINUTE,minute);
             values.put(ALARM_DB_REPEAT,repeat);

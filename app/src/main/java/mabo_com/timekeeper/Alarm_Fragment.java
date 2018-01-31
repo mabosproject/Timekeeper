@@ -1,7 +1,10 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,10 +20,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -167,6 +172,9 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
         int alarm_hour = cal.get(Calendar.HOUR_OF_DAY);
         int alarm_minute = cal.get(Calendar.MINUTE);
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Random rnd = new Random();
+        int alarm_id = (int)(cal.getTimeInMillis()/(rnd.nextInt(10000000))); //生成時刻からID生成する
+        intent.putExtra("ID",alarm_id);
         intent.putExtra("HOUR",alarm_hour);
         intent.putExtra("MINUTE",alarm_minute);
         intent.putExtra("REPEAT",0x00);
@@ -186,6 +194,7 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
             case REQUEST_CODE_ALARM_CONFIG:
 
                 if (resultCode == Activity.RESULT_OK) {
+                    int listId = data.getIntExtra("RET_ID",0);
                     int alarm_hour = data.getIntExtra("RET_HOUR", 0);
                     int alarm_minute = data.getIntExtra("RET_MINUTE", 0);
                     int repeat = data.getIntExtra("RET_REPEAT", 0x00);
@@ -195,7 +204,7 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
                     int snooze = data.getIntExtra("RET_SNOOZE", 0);
                     int vibration = data.getIntExtra("RET_VIBRATION", 0);
                     alarm_db_adapter.openDB();
-                    alarm_db_adapter.saveDB(alarm_hour,alarm_minute,repeat,comment,uri,volume,snooze,vibration);
+                    alarm_db_adapter.saveDB(listId,alarm_hour,alarm_minute,repeat,comment,uri,volume,snooze,vibration);
                     alarm_db_adapter.closeDB();
                     loadMyList();
                 }
@@ -254,7 +263,8 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
                 // IDを取得する
                 alarm_list_structure = items.get(position);
                 int listId = alarm_list_structure.getId();
-
+                Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getActivity().getApplicationContext(),listId);
+                alarm_originalAlarmManager.stopAlarm();
                 alarm_db_adapter.openDB();     // DBの読み込み(読み書きの方)
                 alarm_db_adapter.selectDelete(String.valueOf(listId));     // DBから取得したIDが入っているデータを削除する
                 alarm_db_adapter.closeDB();    // DBを閉じる

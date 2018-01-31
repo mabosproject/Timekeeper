@@ -46,15 +46,14 @@ public class Alarm_OriginalAlarmManager {
     }
 
     public void stopAlarm(){
-        alarmManager.cancel(mAlarmSender);
         mAlarmSender.cancel();
+        alarmManager.cancel(mAlarmSender);
     }
 
     private PendingIntent getPendingIntent(int id) {
         // アラーム時に起動するアプリケーションを登録
         Intent intent = new Intent(context,Alarm_OriginalAlarmService.class);
-        intent.setType(String.valueOf(id));
-        PendingIntent pendingIntent = PendingIntent.getService(context,PendingIntent.FLAG_ONE_SHOT,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,id,intent,0);
         return pendingIntent;
     }
 }

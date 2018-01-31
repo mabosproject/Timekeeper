@@ -2,6 +2,8 @@ package mabo_com.timekeeper;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -12,6 +14,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class Alarm_Config extends Activity {
@@ -164,7 +169,15 @@ public class Alarm_Config extends Activity {
             return_intent.putExtra("RET_VIBRATION",1);
         }
         setResult(RESULT_OK,return_intent);
-        Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getApplication(),id);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,minute);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        if(calendar.getTimeInMillis() < System.currentTimeMillis()){
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getApplicationContext(),id);
         alarm_originalAlarmManager.addAlarm(hour,minute);
         finish();
     }
