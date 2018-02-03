@@ -177,7 +177,7 @@ public class Alarm_Config extends Activity {
         if(calendar.getTimeInMillis() < System.currentTimeMillis()){
             calendar.add(Calendar.DAY_OF_YEAR, 1);
         }
-        Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getApplicationContext(),id);
+        Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getApplicationContext(),id,hour,minute,comment,uri.toString(),volume_bar.getProgress(),determine_repeat,determine_snooze,vibration_on_off);
         alarm_originalAlarmManager.addAlarm(hour,minute);
         finish();
     }

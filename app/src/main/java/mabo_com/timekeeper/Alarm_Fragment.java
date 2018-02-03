@@ -1,10 +1,7 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -263,7 +259,21 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
                 // IDを取得する
                 alarm_list_structure = items.get(position);
                 int listId = alarm_list_structure.getId();
-                Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getActivity().getApplicationContext(),listId);
+                int alarm_hour = alarm_list_structure.getHour();
+                int alarm_minute = alarm_list_structure.getMinute();
+                String comment = alarm_list_structure.getComment();
+                String uri_string = alarm_list_structure.getUri();
+                int volume = alarm_list_structure.getVolume();
+                int determine_repeat = alarm_list_structure.getRepeat();
+                int determine_snooze = alarm_list_structure.getSnooze();
+                int vibration = alarm_list_structure.getVibration();
+                boolean vibration_on_off;
+                if(vibration == 0){
+                    vibration_on_off = false;
+                }else{
+                    vibration_on_off = true;
+                }
+                Alarm_OriginalAlarmManager alarm_originalAlarmManager = new Alarm_OriginalAlarmManager(getActivity().getApplicationContext(),listId,alarm_hour,alarm_minute, comment, uri_string, volume, determine_repeat, determine_snooze, vibration_on_off);
                 alarm_originalAlarmManager.stopAlarm();
                 alarm_db_adapter.openDB();     // DBの読み込み(読み書きの方)
                 alarm_db_adapter.selectDelete(String.valueOf(listId));     // DBから取得したIDが入っているデータを削除する
