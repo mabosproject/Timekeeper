@@ -80,7 +80,7 @@ public class Alarm_Config extends Activity {
         sound_name = ringtone.getTitle(getApplicationContext());
         sound_text.setText(sound_name);
 
-        volume_bar.setProgress(intent_alarm_fragment.getIntExtra("VOLUME",8));
+        volume_bar.setProgress(intent_alarm_fragment.getIntExtra("VOLUME",7));
 
         determine_snooze = intent_alarm_fragment.getIntExtra("SNOOZE",0);
         determine_snooze_text(snooze_text);

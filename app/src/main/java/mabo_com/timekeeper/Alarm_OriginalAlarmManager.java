@@ -42,7 +42,11 @@ public class Alarm_OriginalAlarmManager {
         int diffHour = (int)((cal.getTimeInMillis() - System.currentTimeMillis() + 59999)/(60*60*1000)%24);
         int diffMinute = (int)((cal.getTimeInMillis() - System.currentTimeMillis() + 59999)/(60*1000)%60);
         if(diffDay == 0){
-            Toast.makeText(context,String.format("アラームは%d時間%d分後に設定されました",diffHour,diffMinute),Toast.LENGTH_SHORT).show();
+            if(diffHour == 0){
+                Toast.makeText(context,String.format("アラームは%d分後に設定されました",diffMinute),Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context,String.format("アラームは%d時間%d分後に設定されました",diffHour,diffMinute),Toast.LENGTH_SHORT).show();
+            }
         }else {
             Toast.makeText(context,String.format("アラームは%d日%d時間%d分後に設定されました",diffDay,diffHour,diffMinute),Toast.LENGTH_SHORT).show();
         }

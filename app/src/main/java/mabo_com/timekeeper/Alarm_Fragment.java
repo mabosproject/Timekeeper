@@ -176,7 +176,7 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
         intent.putExtra("REPEAT",0x00);
         intent.putExtra("COMMENT","");
         intent.putExtra("URI",uri.toString());
-        intent.putExtra("VOLUME",8);
+        intent.putExtra("VOLUME",7);
         intent.putExtra("SNOOZE",0);
         intent.putExtra("VIBRATION",0);
         startActivityForResult(intent,REQUEST_CODE_ALARM_CONFIG);
@@ -196,7 +196,7 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
                     int repeat = data.getIntExtra("RET_REPEAT", 0x00);
                     String comment = data.getStringExtra("RET_COMMENT");
                     String uri = data.getStringExtra("RET_URI");
-                    int volume = data.getIntExtra("RET_VOLUME",8);
+                    int volume = data.getIntExtra("RET_VOLUME",7);
                     int snooze = data.getIntExtra("RET_SNOOZE", 0);
                     int vibration = data.getIntExtra("RET_VIBRATION", 0);
                     alarm_db_adapter.openDB();
@@ -214,7 +214,7 @@ public class Alarm_Fragment extends android.support.v4.app.Fragment implements V
                     int alarm_minute = data.getIntExtra("RET_MINUTE", 0);
                     String comment = data.getStringExtra("RET_COMMENT");
                     String uri = data.getStringExtra("RET_URI");
-                    int volume = data.getIntExtra("RET_VOLUME",8);
+                    int volume = data.getIntExtra("RET_VOLUME",7);
                     int repeat = data.getIntExtra("RET_REPEAT", 0x00);
                     int snooze = data.getIntExtra("RET_SNOOZE", 0);
                     int vibration = data.getIntExtra("RET_VIBRATION", 0);

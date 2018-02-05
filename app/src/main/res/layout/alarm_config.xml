@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:max="8"/>
+                    android:max="7"/>
 
             </LinearLayout>
 

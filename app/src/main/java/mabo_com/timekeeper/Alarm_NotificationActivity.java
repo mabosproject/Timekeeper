@@ -1,10 +1,17 @@
 package mabo_com.timekeeper;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -14,8 +21,8 @@ import android.widget.Toast;
  */
 
 public class Alarm_NotificationActivity extends Activity {
-
-    private MediaPlayer mediaPlayer;
+    AudioManager audioManager;
+    private Ringtone alarm_ringtone;
     private Vibrator vibrator;
     private int id,alarm_hour,alarm_minute,volume,repeat,snooze,vibration;
     private String comment,uri_string;
@@ -37,7 +44,12 @@ public class Alarm_NotificationActivity extends Activity {
         snooze = extras.getIntExtra("SNOOZE",0);
         vibration_on_off = extras.getBooleanExtra("VIBRATION",false);
 
+        //アラームの音量設定
+        audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM,volume,0);
+
         vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+
 
         // スクリーンロックを解除する
         // 権限が必要
@@ -52,12 +64,18 @@ public class Alarm_NotificationActivity extends Activity {
     public void onStart() {
         super.onStart();
 
-        int ALARM_TIME = 1000 * 60 * 30;
-        vibrator.vibrate(ALARM_TIME);
-        Toast.makeText(getApplicationContext(),String.format("%d,%d,%d",id,alarm_hour,alarm_minute),Toast.LENGTH_SHORT).show();
-        if (mediaPlayer == null)
-            mediaPlayer = MediaPlayer.create(getApplication(), RingtoneManager.getValidRingtoneUri(getApplication()));
-        mediaPlayer.start();
+        long[] vibration_pattern = {2000,3000,2000,1000};
+        //バイブレーションの有無に応じた処理
+        if(vibration_on_off){
+            vibrator.vibrate(vibration_pattern,0);
+        }
+        alarm_ringtone = RingtoneManager.getRingtone(getApplicationContext(), Uri.parse(uri_string));
+        AudioAttributes attr = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
+        alarm_ringtone.setAudioAttributes(attr);
+        alarm_ringtone.play();
     }
 
     @Override
@@ -70,9 +88,8 @@ public class Alarm_NotificationActivity extends Activity {
 
         vibrator.cancel();
 
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
+        if (alarm_ringtone.isPlaying()) {
+            alarm_ringtone.stop();
         }
     }
 
